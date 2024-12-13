@@ -12,6 +12,17 @@ type Config = {
             exampleTopic: string;
         };
     };
+    database: {
+        adapter: string;
+        config: any;
+    }[];
+    cache: {
+        namespace: string;
+        host: string;
+        port: number;
+        db?: number;
+        password?: string;
+    };
     app: {
         port: number;
     };
@@ -50,6 +61,66 @@ export const config = createProfiguration<Config>(
                 },
             },
         },
+        cache: {
+            namespace: {
+                default: 'cache',
+                format: String,
+                env: 'CACHE_NS',
+            },
+            host: {
+                default: 'localhost',
+                format: String,
+                env: 'CACHE_HOST',
+            },
+            port: {
+                default: 6379,
+                format: Number,
+                env: 'CACHE_PORT',
+            },
+            db: {
+                default: 1,
+                format: Number,
+                env: 'CACHE_DB',
+            },
+            password: {
+                default: '',
+                format: String,
+                env: 'CACHE_PWD',
+            },
+        },
+        database: [
+            {
+                adapter: {
+                    default: 'postgres',
+                    format: String,
+                    env: 'DB_ADAPTER',
+                },
+                config: {
+                    username: {
+                        default: 'root',
+                        format: String,
+                        env: 'DB_USER',
+                    },
+                    password: {
+                        default: 'root',
+                        format: String,
+                        env: 'DB_PWD',
+                    },
+                    replica: {
+                        master: {
+                            default: 'localhost:5432',
+                            format: String,
+                            env: 'DB_MASTER',
+                        },
+                        slaves: {
+                            default: ['localhost:5432'],
+                            format: Array,
+                            env: 'DB_SLAVES',
+                        },
+                    },
+                },
+            },
+        ],
         app: {
             port: {
                 default: 3000,
