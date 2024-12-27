@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 node:18-slim as base
+FROM node:20 as base
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
