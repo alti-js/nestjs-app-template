@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@alti-js/nestjs-cache": "^0.1.0",
-        "@alti-js/nestjs-common": "^0.1.0",
+        "@alti-js/nestjs-common": "latest",
         "@alti-js/nestjs-db": "^0.1.0",
         "@alti-js/nestjs-kafka": "^0.1.0",
         "@golevelup/profiguration": "^0.2.1",
