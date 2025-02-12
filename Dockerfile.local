@@ -1,16 +1,18 @@
-FROM node:20 as base
+FROM node:20 AS base
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
 RUN npm install
 ENV APP_ENV=docker
 
-FROM base as api
+FROM base AS api
 ENV PORT=80
-EXPOSE 8085
+EXPOSE 80
+EXPOSE 9229
 CMD [ "npm", "run", "start:api:debug" ]
 
-FROM base as data
-ENV PORT=8087
-EXPOSE 8087
+FROM base AS data
+ENV PORT=8080
+EXPOSE 8080
+EXPOSE 9230
 CMD [ "npm", "run", "start:data:debug" ]
