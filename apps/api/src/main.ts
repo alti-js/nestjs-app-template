@@ -3,6 +3,10 @@ import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import {
+    HttpExceptionFilter,
+    TransformInterceptor,
+} from '@alti-js/nestjs-common';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -41,6 +45,9 @@ async function bootstrap() {
         .build();
     const documentFactory = () => SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, documentFactory);
+    app.setGlobalPrefix('api');
+    app.useGlobalFilters(new HttpExceptionFilter());
+    app.useGlobalInterceptors(new TransformInterceptor());
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

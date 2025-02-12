@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { SharedModule } from '@shared/shared';
+import { MainModule } from './modules/main/main.module';
 
 @Module({
     imports: [
@@ -11,6 +12,7 @@ import { SharedModule } from '@shared/shared';
                 limit: 60,
             },
         ]),
+        MainModule,
     ],
     controllers: [],
     providers: [],
