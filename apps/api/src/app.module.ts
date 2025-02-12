@@ -4,7 +4,7 @@ import { SharedModule } from '@shared/shared';
 
 @Module({
     imports: [
-        SharedModule,
+        SharedModule.forRoot(),
         ThrottlerModule.forRoot([
             {
                 ttl: 60000,
